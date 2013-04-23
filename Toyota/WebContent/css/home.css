@@ -1,0 +1,99 @@
+    body{
+        text-align:center;
+    }
+    /*CSS to main Container TABLE or DIV or any PlaceHolder TAG of the web page*/
+    
+	#headerDiv {
+    font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
+    margin: 0 auto;
+    min-height: 106px;
+    position: relative;
+    width: 900px;
+    z-index: 5;
+	}
+	#contentDiv{
+	font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
+    margin: 0 auto;
+    padding: 8px 9px 34px;
+    position: relative;
+    width: 910px;
+	min-height:370px;
+	}
+	.logo{
+	background: url("../images/logo.jpg") no-repeat scroll 0 0 transparent;
+    left: 0;
+    position: absolute;
+    text-indent: -999em;
+height:128px;width:140px;
+    }
+	.nav-user{
+	color: #A52A2A;
+    font-size: 0.923em;
+    position: absolute;
+    right: 0;
+    top: 20px;
+	 }
+	 .hr-style{
+	 border: 2px none;
+     position: absolute;
+     top: 115px;
+     width: 900px;
+	 height: 3px; 
+	 z-index:4;
+	 background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+	 background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+	 background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+	 background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));  }
+    
+	#footerDiv{
+	font-family: 'Segoe UI',Tahoma,Arial,Helvetica,sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    width: 910px;
+	}
+	
+	.linkList
+	{
+	color: #707070;
+    float: left;
+    padding: 0 8px;
+	font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+    font-size: 13px
+	}
+	
+	.linkColumn {
+    float: left;
+    }
+    .linkList ul {
+        float: left;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+	.linkList ul li {
+      background: none repeat scroll 0 0 transparent;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+	}
+	.linksDivider {
+    color: #707070;
+    float: left;
+    padding: 0 8px;
+	}
+	.linkList a{ 
+	color: #2E2E2E;
+    font-size: 12px;
+    text-decoration: none;
+    vertical-align: middle;
+	}
+	.linkList a:hover{ 
+	color: #440000;
+    font-size: 12px;
+    vertical-align: middle;
+	text-decoration:underline;
+	}
+	.linkList ul.horizontal li {
+    float: left;
+	}

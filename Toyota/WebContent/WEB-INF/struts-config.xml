@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+    <display-name>Struts Config</display-name>
+   <description>Struts Config</description>
+   	<data-sources>
+		
+	</data-sources>
+    <form-beans>
+        <form-bean name="LoginForm"
+            type="login.LoginForm" />
+        <form-bean name="ModelForm"
+            type="login.ModelForm" />
+        <form-bean name="BuyerForm"
+            type="buyer.BuyerForm" />
+    </form-beans>
+    <global-exceptions>
+    </global-exceptions>
+    <global-forwards></global-forwards>
+    <action-mappings>
+        <action path="/login" name="LoginForm" validate="true" input="/index.jsp"
+            type="login.LoginAction">
+            <forward name="success" path="/welcome.jsp" />
+            <forward name="showModels" path="/jsp/models.jsp" />
+            <forward name="failure" path="/error.jsp" />
+            <forward name="errorPage" path="/error.jsp" />
+            <forward name="showPotentialBuyerForm" path="/jsp/potential_buyer.jsp" />
+        </action>
+        <action path="/buyer" name="BuyerForm" validate="true" input="/jsp/potential_buyer.jsp"
+            type="buyer.BuyerAction">
+            <forward name="success" path="/jsp/potential_buyer.jsp" />
+            <forward name="failure" path="/error.jsp" />
+            <forward name="errorPage" path="/error.jsp" />
+        </action>
+    </action-mappings>
+
+	<controller></controller>    
+</struts-config>
