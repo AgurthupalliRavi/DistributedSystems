@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 
 public class LoginDB {
 
+	final String dealer1Connection = "jdbc:mysql://localhost:3306/dealer1";
+	final String dealer2Connection = "jdbc:mysql://localhost:3306/dealer2";
+	final String masterConnection = "jdbc:mysql://localhost:3306/mydb";
 	private Connection connect = null;
 	private PreparedStatement preparedStatement = null;
 	  
@@ -22,7 +25,7 @@ public class LoginDB {
 			Class.forName("com.mysql.jdbc.Driver");
 			// Setup the connection with the DB
 			connect = DriverManager
-	          .getConnection("jdbc:mysql://localhost:3306/mydb","toyota","toyota");
+	          .getConnection(masterConnection ,"toyota","toyota");
 			preparedStatement = connect.prepareStatement("SELECT M.MODEL_NAME,M.MODEL_NUM,M.PRICE,MT.TYPE,M.MILEAGE,M.SEAT,M.CAPACITY FROM MODEL M,MODELTYPE MT WHERE M.TYPE=MT.TYPENO");
 	        ResultSet set = preparedStatement.executeQuery();
 	        while(set.next())
@@ -47,5 +50,64 @@ public class LoginDB {
 	    	connect.close();
 	    }
 		return aForm;
+	}
+	
+	
+	public LoginForm validateUser(LoginForm uForm) throws Exception
+	{
+		try
+		{
+			// This will load the MySQL driver, each DB has its own driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// Setup the connection with the DB
+			connect = DriverManager
+	          .getConnection(dealer1Connection,"toyota","toyota");
+			preparedStatement = connect.prepareStatement("SELECT CUSTOMER_NO,NAME,PASSWORD, 'CUST' USR FROM CUSTOMER WHERE CUSTOMER_NO= "+Integer.parseInt(uForm.getUserName()) +
+														 "AND PASSWORD='"+ uForm.getPassword() +"' UNION"+
+														 "SELECT EMP_NO,NAME,PASSWORD,'REP' USR FROM REPRESENTATIVE WHERE EMP_NO="+ Integer.parseInt(uForm.getUserName()) +" AND PASSWORD= '"+uForm.getPassword() +"'");
+	        ResultSet set = preparedStatement.executeQuery();
+	        if(set.next())
+	        {
+	        	uForm.setDealerNo("dealer1");
+	        	uForm.setUserStatus(set.getString("USR"));
+	        	return uForm;
+	        }
+	    }
+		catch(Exception ex)
+		{
+			throw ex;
+		}
+	    finally
+	    {
+	    	connect.close();
+	    }
+		
+		try
+		{
+			// This will load the MySQL driver, each DB has its own driver
+			Class.forName("com.mysql.jdbc.Driver");
+			// Setup the connection with the DB
+			connect = DriverManager
+	          .getConnection(dealer2Connection,"toyota","toyota");
+			preparedStatement = connect.prepareStatement("SELECT CUSTOMER_NO,NAME,PASSWORD, 'CUST' USR FROM CUSTOMER WHERE CUSTOMER_NO= "+Integer.parseInt(uForm.getUserName()) +
+														 "AND PASSWORD='"+ uForm.getPassword() +"' UNION"+
+														 "SELECT EMP_NO,NAME,PASSWORD,'REP' USR FROM REPRESENTATIVE WHERE EMP_NO="+ Integer.parseInt(uForm.getUserName()) +" AND PASSWORD= '"+uForm.getPassword() +"'");
+	        ResultSet set = preparedStatement.executeQuery();
+	        if(set.next())
+	        {
+	        	uForm.setDealerNo("dealer2");
+	        	uForm.setUserStatus(set.getString("USR"));
+	        	return uForm;
+	        }
+	    }
+		catch(Exception ex)
+		{
+			throw ex;
+		}
+	    finally
+	    {
+	    	connect.close();
+	    }
+		return uForm;
 	}
 }

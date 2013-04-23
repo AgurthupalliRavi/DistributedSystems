@@ -20,6 +20,7 @@ public class LoginAction extends Action {
         LoginForm loginForm = (LoginForm)form;
         HttpSession session = request.getSession();
         String action= request.getParameter("action");
+        LoginDB db = new LoginDB();
         if(action !=null & action.equals("userLogin"))
         {
             if(loginForm.getUserName().equals("webmaster") && loginForm.getPassword().equals("toyota") ||
@@ -27,11 +28,34 @@ public class LoginAction extends Action {
 	                || loginForm.getUserName().equals("dealer2") && loginForm.getPassword().equals("toyota")) {
 	        	
 	        	session.setAttribute("UN", loginForm.getUserName());
+	        	if(loginForm.getUserName().equals("dealer1"))
+	        	{
+	        		loginForm.setDealerNo("dealer1");
+	        		session.setAttribute("SHOWDATA", "dealer1");
+	        	}
+	        	if(loginForm.getUserName().equals("dealer2"))
+	        	{
+	        		loginForm.setDealerNo("dealer2");
+	        		session.setAttribute("SHOWDATA", "dealer2");
+	        	}
 	            target = "success";
 	            request.setAttribute("message", session.getAttribute("UN"));
 	        }
-	        else {
-	            target = "failure";
+	        else if(loginForm.getUserName() !="" && loginForm.getPassword() !="") 
+	        {
+	        	session.setAttribute("UN", loginForm.getUserName());
+	        	loginForm = db.validateUser(loginForm);
+	        	if(loginForm.getUserStatus() != "")
+	        	{
+		        	target = "success";
+		        	session.setAttribute("USRSTATUS", loginForm.getUserStatus());
+		            request.setAttribute("message", session.getAttribute("UN"));
+	        	}
+	        	else
+		        {
+		            target = "failure";
+		            request.setAttribute("message", "Please check the credentials entered.");
+		        }
 	        }
         }
         if(action !=null & action.equals("logoutSession"))
@@ -44,7 +68,6 @@ public class LoginAction extends Action {
         {
     		try
         	{
-        	LoginDB db = new LoginDB();
         	loginForm.setModelsList(db.getModels());
         	session.setAttribute("modelsList", loginForm.getModelsList());
         	session.setAttribute("loginForm", loginForm);

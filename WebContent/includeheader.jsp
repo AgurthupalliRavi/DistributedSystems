@@ -41,6 +41,8 @@
   <body>
   <%
         String message = (String)request.getAttribute("message");
+  		String user = (String)session.getAttribute("UN");
+  		String userStatus = (String)session.getAttribute("USRSTATUS");
   %>
   <html:form action="login">
   <div id="bodycontainer">
@@ -49,7 +51,7 @@
   	<img src="images/Logout.png" style="cursor: pointer;float: right;height: 30px;margin-top: 20px;" border=0 onclick="document.forms[0].action.value='logoutSession';document.forms[0].submit(); return false;" />
   	<hr class="hr-style" />
   	<ul class="navi">
-  	<% if(message.equals("webmaster")) { %>
+  	<% if(user.equals("webmaster")) { %>
 	<li><a href="#">Models & Add-Ons</a></li>
 	<li><a href="#">Vehicles</a></li>
 	<li><a href="#">Sales-Personnel</a></li>
@@ -59,9 +61,9 @@
 	<li><a href="#">Finance</a></li>
 	<li><a href="#">Potential-Buyers</a></li>
 	<% } %>
-	<% if(message.equals("dealer1")) { %>
+	<% if(user.equals("dealer1")) { %>
 	<li><a href="#">Models & Add-Ons</a></li>
-	<li><a href="#">Vehicles</a></li>
+	<li><a href="">Vehicles</a></li>
 	<li><a href="#">Sales-Personnel</a></li>
 	<li><a href="#">Rebates</a></li>
 	<li><a href="#">Sales</a></li>
@@ -69,7 +71,7 @@
 	<li><a href="#">Finance</a></li>
 	<li><a href="#">Potential-Buyers</a></li>
 	<% } %>
-	<% if (message.equals("dealer2")) { %>
+	<% if (user.equals("dealer2")) { %>
 	<li><a href="#">Models & Add-Ons</a></li>
 	<li><a href="#">Vehicles</a></li>
 	<li><a href="#">Sales-Personnel</a></li>
@@ -78,11 +80,16 @@
 	<li><a href="#">Customers</a></li>
 	<li><a href="#">Finance</a></li>
 	<li><a href="#">Potential-Buyers</a></li>
-	<% } if(!(message.equals("dealer1") || message.equals("dealer2") || message.equals("webmaster"))) {%>
+	<% } if(!(message.equals("dealer1") || message.equals("dealer2") || message.equals("webmaster"))) {	%>
+	<% if(userStatus.equals("CUST")){ %>
 	<li><a href="#">My Profile</a></li>
 	<li><a href="#">Vehicles</a></li>
 	<li><a href="#">My Orders</a></li>
-	<%} %>
+	<%} else{%>
+	<li><a href="#">My Profile</a></li>
+	<li><a href="#">Vehicles</a></li>
+	<li><a href="#">My Orders</a></li>
+	<%}} %>
 	</ul>
  </div>
  <div id="contentDiv">

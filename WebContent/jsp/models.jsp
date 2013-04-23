@@ -139,21 +139,15 @@
   <hr class="hr-style" />
   </div>
   <div id="contentDiv" style="margin-top:20px;">
-       <display:table export="true"  id="data" name="sessionScope.LoginForm.modelsList" >
-     <display:caption>Models</display:caption>
-    <display:column property="modelName" title="Model Name"
-                    sortable="true"/>
-    <display:column property="price" title="Price"
-                    sortable="true"/>
-    <display:column property="type" title="Type"
-                    sortable="true"/>
-    <display:column property="mileage" title="Mileage"
-                    sortable="true"/>
-    <display:column property="seat" title="Seat"
-                    sortable="true"/>
-    <display:column property="capacity" title="Capacity"
-                    sortable="true"/>
-     </display:table>
+    <display:table export="true"  id="data" name="sessionScope.LoginForm.modelsList" >
+    <display:caption>Models</display:caption>
+    <display:column property="modelName" title="Model Name" />
+    <display:column property="price" title="Price" />
+    <display:column property="type" title="Type" />
+    <display:column property="mileage" title="Mileage" />
+    <display:column property="seat" title="Seat" />
+    <display:column property="capacity" title="Capacity" />
+    </display:table>
   </div>
   <div id="footerDiv" style="padding:35px;">
   <hr class="hr-style" style="top:0px" />
